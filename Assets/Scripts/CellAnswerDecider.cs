@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 
 public class CellAnswerDecider
 {
     private CellData _rightAnswer;
     private List<string> _pastRightAnswers;
+
+    public event Action<CellData> RightAnswerPicked;
 
     public CellAnswerDecider()
     {
@@ -33,11 +36,17 @@ public class CellAnswerDecider
         _pastRightAnswers.Add(_rightAnswer.ID);
 
         this.Print($"picked answer: {_rightAnswer.ID}");
+        RightAnswerPicked?.Invoke(_rightAnswer);
         return _rightAnswer;
     }
 
     public bool IsRightAsnwer(CellData cellData)
     {
         return cellData.ID == _rightAnswer.ID;
+    }
+
+    public void ClearRightAnswers()
+    {
+        _pastRightAnswers.Clear();
     }
 }

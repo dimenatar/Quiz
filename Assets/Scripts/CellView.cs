@@ -28,4 +28,9 @@ public class CellView : ClickableMonobehaviour, IPointerUpHandler
     {
         Click();
     }
+
+    public void PlayBounceAnimation()
+    {
+
+    }
 }
