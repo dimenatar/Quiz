@@ -32,7 +32,6 @@ public abstract class CellClicker : ITickable
         {
             if (hitInfo.collider.TryGetComponent(out IClickable clickable))
             {
-                this.Print(clickable);
                 Clicked?.Invoke(clickable);
             }
         }
