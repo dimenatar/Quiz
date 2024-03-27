@@ -23,7 +23,7 @@ public class CellAnswerDecider
         return isPossibleToPick;
     }
 
-    public void PickRightAnswer(List<CellData> cellDatas)
+    public CellData PickRightAnswer(List<CellData> cellDatas)
     {
         _rightAnswer = cellDatas.GetRandom(cellData => !_pastRightAnswers.Contains(cellData.ID));
         if (_rightAnswer == null)
@@ -33,6 +33,7 @@ public class CellAnswerDecider
         _pastRightAnswers.Add(_rightAnswer.ID);
 
         this.Print($"picked answer: {_rightAnswer.ID}");
+        return _rightAnswer;
     }
 
     public bool IsRightAsnwer(CellData cellData)

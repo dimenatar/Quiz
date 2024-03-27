@@ -1,6 +1,7 @@
 using Data;
 using Scriptables;
 using System.Collections.Generic;
+using System.Linq;
 
 public class GameplayFlow
 {
@@ -30,6 +31,7 @@ public class GameplayFlow
         {
             if (_cellAnswerDecider.IsRightAsnwer(cellView.CellData))
             {
+                _cellSpawner.DestroyCells();
                 StartStage(++_currentStageIndex);
             }
             else
@@ -60,8 +62,20 @@ public class GameplayFlow
                 throw new System.Exception("No bundle available");
             }
         }
-        var cellData = pickedBundle.CellDatas;
-        var cellViews = _cellSpawner.CreateCells(stageData, cellData);
-        _cellAnswerDecider.PickRightAnswer(cellData);
+        var cellDatas = pickedBundle.CellDatas;
+        var rightAnswer = _cellAnswerDecider.PickRightAnswer(cellDatas);
+
+        
+        var randomCells = cellDatas.TakeRandom(stageData.ColumnCount.Sum() - 1).ToList();
+        if (randomCells.Contains(rightAnswer))
+        {
+            randomCells.Add(cellDatas.GetRandom(cellData => !randomCells.Contains(cellData)));
+        }
+        else
+        {
+            randomCells.Add(rightAnswer);
+        }
+
+        var cellViews = _cellSpawner.CreateCells(stageData, randomCells);
     }
 }

@@ -209,6 +209,40 @@ public static class Extension
         return new Vector3(UnityEngine.Random.Range(minMaxX.Key, minMaxX.Value), UnityEngine.Random.Range(minMaxY.Key, minMaxY.Value), UnityEngine.Random.Range(minMaxZ.Key, minMaxZ.Value));
     }
 
+    public static IEnumerable<T> TakeRandom<T>(this IEnumerable<T> source, Func<T, bool> selector, int amount)
+    {
+        var result = source.Where(item => selector(item)).ToList();
+        amount = Mathf.Clamp(amount, 0, result.Count());
+
+        List<int> takenIndexes = new List<int>();
+        int randomIndex = UnityEngine.Random.Range(0, amount);
+        while (takenIndexes.Count < amount)
+        {
+            while (takenIndexes.Contains(randomIndex))
+            {
+                randomIndex = UnityEngine.Random.Range(0, amount);
+            }
+            yield return result.ElementAt(randomIndex);
+        }
+    }
+
+    public static IEnumerable<T> TakeRandom<T>(this IEnumerable<T> source, int amount)
+    {
+        amount = Mathf.Clamp(amount, 0, source.Count());
+
+        List<int> takenIndexes = new List<int>();
+        int randomIndex = UnityEngine.Random.Range(0, amount);
+        while (takenIndexes.Count < amount)
+        {
+            while (takenIndexes.Contains(randomIndex))
+            {
+                randomIndex = UnityEngine.Random.Range(0, amount);
+            }
+            takenIndexes.Add(randomIndex);
+            yield return source.ElementAt(randomIndex);
+        }
+    }
+
     public static Vector3 GetVectorFromAngle(float angle)
     {
         float angleRad = angle * (Mathf.PI / 180f);

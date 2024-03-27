@@ -33,7 +33,7 @@ public class CellSpawner
     public List<CellView> CreateCells(StageData stageData, List<CellData> cellDatas)
     {
         List<int> columns = stageData.ColumnCount;
-        float totalWidth = 0f;
+
         float totalHeight = 0f;
 
         float prefabWidth = _cellPrefab.GetWidth();
@@ -41,13 +41,16 @@ public class CellSpawner
 
         totalHeight = columns.Count * prefabHeight + _spacing * columns.Count - 1;
 
-        totalWidth = GetTotalWidth(columns, totalWidth, prefabWidth);
+        //totalWidth = GetTotalWidth(columns, totalWidth, prefabWidth);
 
-        float startX = _cellParent.transform.position.x - totalWidth / 2f;
-        float currentY = _cellParent.transform.position.y - totalHeight / 2f;
+
+        float currentY = totalHeight / 2f;
 
         for (int i = 0; i < columns.Count; i++)
         {
+            float totalWidth = prefabWidth * columns[i] + _spacing * (columns[i] - 1);
+
+            float startX = -((totalWidth - 1) / 2f);
             float currentX = startX;
 
             for (int j = 0; j < columns[i]; j++)
@@ -70,14 +73,4 @@ public class CellSpawner
         cellDatas.Remove(randomCellData);
         copy.Initialise(randomCellData);
     }
-
-    private float GetTotalWidth(List<int> columns, float totalWidth, float prefabWidth)
-    {
-        columns.ForEach(column =>
-        {
-            totalWidth += prefabWidth * column + _spacing * column - 1;
-        });
-        return totalWidth;
-    }
-
 }
