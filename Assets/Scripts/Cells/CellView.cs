@@ -23,6 +23,7 @@ namespace Cells
         {
             CellData = cellData;
             _mainSpriteRenderer.sprite = cellData.MainSprite;
+            _mainSpriteRenderer.transform.localRotation = cellData.LocalRotation;
             _mainSpriteStartLocalPosition = _mainSpriteRenderer.transform.localPosition;
         }
 

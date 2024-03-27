@@ -51,6 +51,7 @@ namespace Global
                     }
                     else
                     {
+                        _cellClicker.SetEnabledState(false);
                         CompeltedAllStages?.Invoke();
                     }
                 }

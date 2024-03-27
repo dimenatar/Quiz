@@ -33,7 +33,6 @@ namespace Resetters
 
         public void Reset()
         {
-            _cellClicker.SetEnabledState(false);
             for (int i = 0; i < _resettables.Count; i++)
             {
                 if (_resettables[i] == null)
