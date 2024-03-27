@@ -52,7 +52,7 @@ namespace Cells
         public void ScaleIn()
         {
             _currentTween?.Kill();
-            _currentTween = transform.ScaleIn();
+            _currentTween = transform.ScaleIn(Ease.InBounce);
         }
     }
 }
