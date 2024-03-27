@@ -2,14 +2,15 @@ using Data;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CellSpawner
+public class CellSpawner : IResettable
 {
-     private CellView _cellPrefab;
-     private Transform _cellParent;
+    private CellView _cellPrefab;
+    private Transform _cellParent;
 
-     private float _spacing;
+    private float _spacing;
 
     private List<CellView> _spawnedCells;
+    private bool _isSpawnWithAnimation = true;
 
     public CellSpawner(CellView cellPrefab, float spacing)
     {
@@ -57,12 +58,18 @@ public class CellSpawner
             {
                 var copy = Object.Instantiate(_cellPrefab, _cellParent);
                 SetupCell(cellDatas, currentY, currentX, copy);
+
+                if (_isSpawnWithAnimation)
+                {
+                    copy.ScaleIn();
+                }
+
                 _spawnedCells.Add(copy);
                 currentX += prefabWidth + _spacing;
             }
             currentY = currentY - prefabHeight - _spacing;
         }
-
+        _isSpawnWithAnimation = false;
         return _spawnedCells;
     }
 
@@ -72,5 +79,10 @@ public class CellSpawner
         var randomCellData = cellDatas.GetRandom();
         cellDatas.Remove(randomCellData);
         copy.Initialise(randomCellData);
+    }
+
+    public void Reset()
+    {
+        _isSpawnWithAnimation = true;
     }
 }

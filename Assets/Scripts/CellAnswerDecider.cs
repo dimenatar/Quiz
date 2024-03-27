@@ -6,6 +6,8 @@ public class CellAnswerDecider
     private CellData _rightAnswer;
     private List<string> _pastRightAnswers;
 
+    public string RightAnswerID => _rightAnswer.ID;
+
     public event Action<CellData> RightAnswerPicked;
 
     public CellAnswerDecider()
@@ -35,7 +37,7 @@ public class CellAnswerDecider
         }
         _pastRightAnswers.Add(_rightAnswer.ID);
 
-        this.Print($"picked answer: {_rightAnswer.ID}");
+        this.Print($"picked right answer: {_rightAnswer.ID}");
         RightAnswerPicked?.Invoke(_rightAnswer);
         return _rightAnswer;
     }

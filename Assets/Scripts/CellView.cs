@@ -33,4 +33,9 @@ public class CellView : ClickableMonobehaviour, IPointerUpHandler
     {
 
     }
+
+    public void ScaleIn()
+    {
+        transform.ScaleIn();
+    }
 }

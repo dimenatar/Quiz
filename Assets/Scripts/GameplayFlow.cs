@@ -1,5 +1,6 @@
 using Data;
 using Scriptables;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,6 +14,8 @@ public class GameplayFlow
 
     private int _currentStageIndex;
     private List<StageData> _stageDatas;
+
+    public event Action CompeltedAllStages;
 
     public GameplayFlow(StagesConfig stagesConfig, CellClicker cellClicker, CellSpawner cellSpawner, CellAnswerDecider cellAnswerDecider, List<CellBundle> cellBundles, CellParticles cellParticles)
     {
@@ -35,14 +38,24 @@ public class GameplayFlow
             if (_cellAnswerDecider.IsRightAsnwer(cellView.CellData))
             {
                 _cellParticles.PlayCorrectParticles(cellView);
-                _cellSpawner.DestroyCells();
-                StartStage(++_currentStageIndex);
+
+                if (++_currentStageIndex < _stageDatas.Count)
+                {
+                    _cellSpawner.DestroyCells();
+                    StartStage(_currentStageIndex);
+                }
+                else
+                {
+                    CompeltedAllStages?.Invoke();
+                }
             }
         }
     }
 
     public void StartGameplayFlow()
     {
+        _cellClicker.SetEnabledState(true);
+        _currentStageIndex = 0;
         StartStage(_currentStageIndex);
     }
 
@@ -82,6 +95,7 @@ public class GameplayFlow
             {
                 pickedBundle = randomBundle;
                 isPickedBundle = true;
+                break;
             }
             availableCellBundles.Remove(randomBundle);
         }

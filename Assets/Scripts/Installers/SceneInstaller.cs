@@ -16,6 +16,7 @@ namespace Installers
             _updater.Initialise();
             _updater.AddTickable(cellClicker);
 
+            cellClicker.SetCamera(Camera.main);
             cellSpawner.SetCellParent(_cellParent);
 
             _gameplayFlow = gameplayFlow;

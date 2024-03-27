@@ -20,9 +20,9 @@ MonoBehaviour:
   - _id: 3
     _mainSprite: {fileID: -7900951133411543555, guid: cc306dc4c72243546b4b5b5bd2c75912, type: 3}
   - _id: 4
-    _mainSprite: {fileID: -7398325283844340781, guid: cc306dc4c72243546b4b5b5bd2c75912, type: 3}
-  - _id: 5
     _mainSprite: {fileID: 2267071060405275165, guid: cc306dc4c72243546b4b5b5bd2c75912, type: 3}
+  - _id: 5
+    _mainSprite: {fileID: -7398325283844340781, guid: cc306dc4c72243546b4b5b5bd2c75912, type: 3}
   - _id: 6
     _mainSprite: {fileID: -7015292045520539579, guid: cc306dc4c72243546b4b5b5bd2c75912, type: 3}
   - _id: 7

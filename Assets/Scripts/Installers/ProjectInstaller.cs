@@ -11,15 +11,16 @@ public class ProjectInstaller : MonoInstaller
 
     [SerializeField] private ParticleSystem _rightAnswerParticles;
 
+    [SerializeField] private float _delayToResetStage = 0.5f;
     [SerializeField] private float _spacing = 0f;
 
     public override void InstallBindings()
     {
 
 
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
         CellClicker cellClicker = new MobileCellClicker();
-#else
+#elif UNITY_EDITOR
         CellClicker cellClicker = new MouseCellClicker();
 #endif
         CellAnswerDecider cellAnswerDecider = new CellAnswerDecider();
@@ -27,11 +28,15 @@ public class ProjectInstaller : MonoInstaller
         CellParticles cellParticles = new CellParticles(_rightAnswerParticles);
 
         GameplayFlow gameplayFlow = new GameplayFlow(_stagesConfig, cellClicker, cellSpawner, cellAnswerDecider, _cellBundles, cellParticles);
+        Resetter resetter = new Resetter(gameplayFlow, cellSpawner, cellClicker, _delayToResetStage);
+
+        resetter.AddResettable(cellSpawner);
 
         Container.Bind<CellClicker>().FromInstance(cellClicker).AsSingle();
         Container.Bind<CellAnswerDecider>().FromInstance(cellAnswerDecider).AsSingle();
         Container.Bind<CellSpawner>().FromInstance(cellSpawner).AsSingle();
         Container.Bind<CellParticles>().FromInstance(cellParticles).AsSingle();
         Container.Bind<GameplayFlow>().FromInstance(gameplayFlow).AsSingle();
+        Container.Bind<Resetter>().FromInstance(resetter).AsSingle();
     }
 }
