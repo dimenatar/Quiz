@@ -45,13 +45,14 @@ public class CellSpawner : IResettable
         //totalWidth = GetTotalWidth(columns, totalWidth, prefabWidth);
 
 
-        float currentY = totalHeight / 2f;
+        float currentY = (totalHeight - prefabHeight) / 2f;
 
         for (int i = 0; i < columns.Count; i++)
         {
             float totalWidth = prefabWidth * columns[i] + _spacing * (columns[i] - 1);
 
-            float startX = -((totalWidth - 1) / 2f);
+            float startX = -((totalWidth - prefabWidth) / 2f);
+            //float startX = (-totalWidth / 2f);
             float currentX = startX;
 
             for (int j = 0; j < columns[i]; j++)

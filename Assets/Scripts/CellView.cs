@@ -1,8 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class CellView : ClickableMonobehaviour, IPointerUpHandler
+public class CellView : ClickableMonobehaviour
 {
     [SerializeField] private SpriteRenderer _mainSpriteRenderer;
     [SerializeField] private SpriteRenderer _backgroundSpriteRenderer;
@@ -31,11 +30,6 @@ public class CellView : ClickableMonobehaviour, IPointerUpHandler
     public float GetHeight()
     {
         return _backgroundSpriteRenderer.sprite.bounds.size.y * _backgroundSpriteRenderer.transform.lossyScale.y;
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        Click();
     }
 
     public void PlayBounceAnimation()
