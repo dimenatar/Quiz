@@ -77,6 +77,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a57ade3c36f8e2644b9cf46725cb4e36, type: 2}
   - {fileID: 11400000, guid: d037c88a5177a584c87c68af4e261b78, type: 2}
   _stagesConfig: {fileID: 11400000, guid: 2c465d186474fda479f382f296827740, type: 2}
+  _cellBackgroundColorBundle: {fileID: 11400000, guid: e37be80c1d368e446b71ec3de444b77c, type: 2}
   _cellView: {fileID: 5900093601895211100, guid: 31e17d84e6464fd469e86015ddf45095, type: 3}
   _rightAnswerParticles: {fileID: 4667707668743699396, guid: dde93fa3e635c1b46b1dfd6c7d652173, type: 3}
   _delayToResetStage: 0.5

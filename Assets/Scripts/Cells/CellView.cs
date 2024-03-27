@@ -27,6 +27,11 @@ namespace Cells
             _mainSpriteStartLocalPosition = _mainSpriteRenderer.transform.localPosition;
         }
 
+        public void SetBackgroundColor(Color color)
+        {
+            _backgroundSpriteRenderer.color = color;
+        }
+
         public float GetWidth()
         {
             return _backgroundSpriteRenderer.sprite.bounds.size.x * _backgroundSpriteRenderer.transform.lossyScale.x;

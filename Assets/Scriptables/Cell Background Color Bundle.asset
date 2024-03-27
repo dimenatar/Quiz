@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74f19e67fee43f94497aced280d19851, type: 3}
+  m_Name: Cell Background Color Bundle
+  m_EditorClassIdentifier: 
+  _colors:
+  - {r: 1, g: 0.92374116, b: 0.5801887, a: 1}
+  - {r: 0.51152545, g: 0.8962264, b: 0.62282693, a: 1}
+  - {r: 0.5707547, g: 1, b: 0.9787808, a: 1}
+  - {r: 0.6748871, g: 0.5424528, b: 1, a: 1}
+  - {r: 0.5613208, g: 1, b: 0.740845, a: 1}

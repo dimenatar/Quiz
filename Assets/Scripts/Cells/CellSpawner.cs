@@ -1,5 +1,6 @@
 using Data;
 using Resetters;
+using Scriptables;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,17 +10,19 @@ namespace Cells
     {
         private CellView _cellPrefab;
         private Transform _cellParent;
+        private List<Color> _backgroundColors;
 
         private float _spacing;
 
         private List<CellView> _spawnedCells;
         private bool _isSpawnWithAnimation = true;
 
-        public CellSpawner(CellView cellPrefab, float spacing)
+        public CellSpawner(CellView cellPrefab, CellBackgroundColorBundle cellBackgroundColorBundle, float spacing)
         {
             _cellPrefab = cellPrefab;
             _spacing = spacing;
 
+            _backgroundColors = cellBackgroundColorBundle.Colors;
             _spawnedCells = new List<CellView>();
         }
 
@@ -74,12 +77,13 @@ namespace Cells
             return _spawnedCells;
         }
 
-        private static void SetupCell(List<CellData> cellDatas, float currentY, float currentX, CellView copy)
+        private void SetupCell(List<CellData> cellDatas, float currentY, float currentX, CellView copy)
         {
             copy.transform.localPosition = new Vector3(currentX, currentY, 0);
             var randomCellData = cellDatas.GetRandom();
             cellDatas.Remove(randomCellData);
             copy.Initialise(randomCellData);
+            copy.SetBackgroundColor(_backgroundColors.GetRandom());
         }
 
         public void Reset()

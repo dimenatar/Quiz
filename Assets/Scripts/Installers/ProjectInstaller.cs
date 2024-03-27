@@ -13,8 +13,9 @@ namespace Installers
     {
         [SerializeField] private List<CellBundle> _cellBundles;
         [SerializeField] private StagesConfig _stagesConfig;
-        [SerializeField] private CellView _cellView;
+        [SerializeField] private CellBackgroundColorBundle _cellBackgroundColorBundle;
 
+        [SerializeField] private CellView _cellView;
         [SerializeField] private ParticleSystem _rightAnswerParticles;
 
         [SerializeField] private float _delayToResetStage = 0.5f;
@@ -30,7 +31,7 @@ namespace Installers
             CellClicker cellClicker = new MouseCellClicker();
 #endif
             CellAnswerDecider cellAnswerDecider = new CellAnswerDecider();
-            CellSpawner cellSpawner = new CellSpawner(_cellView, _spacing);
+            CellSpawner cellSpawner = new CellSpawner(_cellView, _cellBackgroundColorBundle, _spacing);
             CellParticles cellParticles = new CellParticles(_rightAnswerParticles);
 
             GameplayFlow gameplayFlow = new GameplayFlow(_stagesConfig, cellClicker, cellSpawner, cellAnswerDecider, _cellBundles, cellParticles);
