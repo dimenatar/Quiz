@@ -1,45 +1,50 @@
+using Global;
+using Resetters;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class ResetButton : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private Button _button;
-
-    private GameplayFlow _gameplayFlow;
-    private Resetter _resetter;
-
-    [Inject]
-    private void Construct(GameplayFlow gameplayFlow, Resetter resetter)
+    public class ResetButton : MonoBehaviour
     {
-        _gameplayFlow = gameplayFlow;
-        _resetter = resetter;
-    }
+        [SerializeField] private Button _button;
 
-    private void Awake()
-    {
-        _gameplayFlow.CompeltedAllStages += OnCompletedAllStages;
-        _button.onClick.AddListener(ButtonClick);
-    }
+        private GameplayFlow _gameplayFlow;
+        private Resetter _resetter;
 
-    private void Start()
-    {
-        gameObject.Disable();
-    }
+        [Inject]
+        private void Construct(GameplayFlow gameplayFlow, Resetter resetter)
+        {
+            _gameplayFlow = gameplayFlow;
+            _resetter = resetter;
+        }
 
-    private void OnDestroy()
-    {
-        _gameplayFlow.CompeltedAllStages -= OnCompletedAllStages;
-    }
+        private void Awake()
+        {
+            _gameplayFlow.CompeltedAllStages += OnCompletedAllStages;
+            _button.onClick.AddListener(ButtonClick);
+        }
 
-    private void ButtonClick()
-    {
-        gameObject.Disable();
-        _resetter.Reset();
-    }
+        private void Start()
+        {
+            gameObject.Disable();
+        }
 
-    private void OnCompletedAllStages()
-    {
-        transform.ScaleIn();
+        private void OnDestroy()
+        {
+            _gameplayFlow.CompeltedAllStages -= OnCompletedAllStages;
+        }
+
+        private void ButtonClick()
+        {
+            gameObject.Disable();
+            _resetter.Reset();
+        }
+
+        private void OnCompletedAllStages()
+        {
+            transform.ScaleIn();
+        }
     }
 }

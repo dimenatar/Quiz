@@ -1,4 +1,8 @@
+using Cells;
+using Cells.Clickers;
+using Global;
 using UnityEngine;
+using Updaters;
 using Zenject;
 
 namespace Installers

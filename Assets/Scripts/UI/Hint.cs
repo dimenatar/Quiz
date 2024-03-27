@@ -1,3 +1,5 @@
+using Cells;
+using Data;
 using TMPro;
 using UnityEngine;
 using Zenject;
