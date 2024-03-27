@@ -1,6 +1,7 @@
 using Clickables;
 using Data;
 using DG.Tweening;
+using Extensions;
 using UnityEngine;
 
 namespace Cells

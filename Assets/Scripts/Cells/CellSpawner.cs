@@ -1,4 +1,5 @@
 using Data;
+using Extensions;
 using Resetters;
 using Scriptables;
 using System.Collections.Generic;
@@ -55,7 +56,6 @@ namespace Cells
                 float totalWidth = prefabWidth * columns[i] + _spacing * (columns[i] - 1);
 
                 float startX = -((totalWidth - prefabWidth) / 2f);
-                //float startX = (-totalWidth / 2f);
                 float currentX = startX;
 
                 for (int j = 0; j < columns[i]; j++)
